@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="OVq-Dn-zKE">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="78T-9j-d4T">
+            <objects>
+                <viewController id="OVq-Dn-zKE" customClass="FLTRViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HKX-EM-TmX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="FVs-0C-pB2" userLabel="View - Top">
+                                <rect key="frame" x="0.0" y="20" width="320" height="40"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter url" minimumFontSize="17" clearButtonMode="whileEditing" id="Rg5-Qc-gP5">
+                                        <rect key="frame" x="10" y="5" width="265" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" id="2Kp-yY-S1G" userLabel="View - Top Buttons">
+                                        <rect key="frame" x="280" y="5" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xrR-kj-Qea">
+                                                <rect key="frame" x="-1" y="-1" width="32" height="32"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="reload.png"/>
+                                                <connections>
+                                                    <action selector="handleReloadStopButtonClick:" destination="OVq-Dn-zKE" eventType="touchUpInside" id="2d0-os-lsk"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </view>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="ZMf-cP-dos">
+                                <rect key="frame" x="0.0" y="58" width="320" height="2"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <view contentMode="scaleToFill" id="iEb-je-bcd" userLabel="View - Browsers">
+                                <rect key="frame" x="0.0" y="60" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <webView contentMode="scaleToFill" id="n5z-8v-eKF">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </webView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="dxL-ep-saT" userLabel="Toolbar - Bottom">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem enabled="NO" image="back.png" id="umk-R0-wIy">
+                                        <connections>
+                                            <action selector="goBack" destination="n5z-8v-eKF" id="isa-WO-iJr"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem enabled="NO" image="forward.png" id="7Jd-uE-HXT">
+                                        <connections>
+                                            <action selector="goForward" destination="n5z-8v-eKF" id="UzL-Y7-FEf"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="umk-R0-wIy" id="7YZ-g9-jg4"/>
+                        <outlet property="forwardButton" destination="7Jd-uE-HXT" id="CCt-AX-ITY"/>
+                        <outlet property="progressBar" destination="ZMf-cP-dos" id="tAV-ig-P4c"/>
+                        <outlet property="reloadStopButton" destination="xrR-kj-Qea" id="3VA-sS-xZi"/>
+                        <outlet property="textField" destination="Rg5-Qc-gP5" id="H2v-Rh-GM3"/>
+                        <outlet property="webView" destination="n5z-8v-eKF" id="qEj-0D-gxK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1G4-2k-ySf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-33" y="-43"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back.png" width="27" height="27"/>
+        <image name="forward.png" width="27" height="27"/>
+        <image name="reload.png" width="32" height="32"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

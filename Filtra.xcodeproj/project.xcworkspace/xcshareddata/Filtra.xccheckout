@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C1205E43-C723-4C03-B093-FEB88BC95E38</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Filtra</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>092D73DF-85E5-499E-8220-CC7800ACE23A</key>
+		<string>ssh://github.com/jsignanini/filtra.git</string>
+		<key>38988A09-8D63-4389-810D-083E7A07060B</key>
+		<string>ssh://github.com/jsignanini/filtra.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Filtra.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>092D73DF-85E5-499E-8220-CC7800ACE23A</key>
+		<string>../../../filtra</string>
+		<key>38988A09-8D63-4389-810D-083E7A07060B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/jsignanini/filtra.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>38988A09-8D63-4389-810D-083E7A07060B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>092D73DF-85E5-499E-8220-CC7800ACE23A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>filtra</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>38988A09-8D63-4389-810D-083E7A07060B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Filtra</string>
+		</dict>
+	</array>
+</dict>
+</plist>
