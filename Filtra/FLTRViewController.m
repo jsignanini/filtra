@@ -114,22 +114,36 @@
 }
 
 - (BOOL) validateUrl: (NSString *) candidate {
-    NSString *urlRegEx =
-    @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
-    return [urlTest evaluateWithObject:candidate];
+    if ([candidate rangeOfString:@" "].location != NSNotFound ||
+            [candidate rangeOfString:@"."].location == NSNotFound) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 - (void)loadUrlOrSearch:(NSString *)text
 {
     if ([self validateUrl:text]) {
+        if ([text rangeOfString:@"://"].location == NSNotFound) {
+            text = [@"http://" stringByAppendingString: text];
+        }
         NSURLRequest *requestURL = [NSURLRequest requestWithURL:[NSURL URLWithString:text]];
         [webView loadRequest:requestURL];
     } else {
         // TODO Do DuckDuckGo search
         //        [self updateAddressBar: [NSString stringWithFormat:@"http://www.google.com/search?q=%@", text]];
+        
+        
+//        NSString *unescaped = @"http://www";
+        NSString *charactersToEscape = @"!*'();:@&=+$,/?%#[]\" ";
+        NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:charactersToEscape] invertedSet];
+        NSString *encodedString = [text stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
+        
+        
         NSURLRequest *requestURL = [NSURLRequest requestWithURL:
-                                    [NSURL URLWithString: [NSString stringWithFormat:@"http://www.google.com/search?q=%@", text]]];
+                                    [NSURL URLWithString: [NSString stringWithFormat:@"http://www.google.com/search?q=%@", encodedString]]];
+        
         [webView loadRequest:requestURL];
     }
     

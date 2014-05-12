@@ -28,7 +28,7 @@
     //        [super storeCachedResponse:cachedResponse forRequest:request];
     //
     //    }
-    NSLog(@"Request: %@", request.URL.absoluteString);
+//    NSLog(@"Request: %@", request.URL.absoluteString);
     return [super cachedResponseForRequest:request];
 }
 
