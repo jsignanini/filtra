@@ -7,6 +7,7 @@
 //
 
 #import "FLTRViewController.h"
+#import "FLTRTabsCollection.h"
 
 @interface FLTRViewController ()
 
@@ -14,20 +15,51 @@
 
 @implementation FLTRViewController
 
-@synthesize webView, textField, progressBar, myTimer, pageLoaded, backButton, forwardButton, reloadStopButton;
+@synthesize tabsView, textField, progressBar, myTimer, pageLoaded, backButton, forwardButton, reloadStopButton;
 
+- (IBAction)testclick
+{
+//    [UIView animateWithDuration:1.0
+//                     animations:
+//                        ^{
+//                         CGRect frame = self.tabsView.frame;
+//                         frame.size.height = 180.0;
+//                         frame.size.width = 103.0;
+//                         self.tabsView.frame = frame;
+//                     }
+//                     completion:^(BOOL finished){
+//                         // whatever you need to do when animations are complete
+//                     }];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.75];
+    CGRect frame = self.tabsView.frame;
+    frame.size.height = 180.0;
+    frame.size.width = 103.0;
+    self.tabsView.frame = frame;
+    [UIView commitAnimations];
 
-- (void)webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error {
-    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 - (IBAction)handleReloadStopButtonClick:(id)sender
 {
     if (reloadStopButton.selected) {
-        [webView stopLoading];
+        [self.currentTab.webView stopLoading];
     } else {
-        [webView reload];
+        [self.currentTab.webView reload];
     }
     
     reloadStopButton.selected = !reloadStopButton.selected;
@@ -39,72 +71,10 @@
     forwardButton.enabled = theWebView.canGoForward;
 }
 
-- (void)startLoadingProgressBar
-{
-    progressBar.progress = 0;
-    progressBar.hidden = NO;
-    pageLoaded = false;
-    //0.01667 is roughly 1/60, so it will update at 60 FPS
-    myTimer = [NSTimer scheduledTimerWithTimeInterval:0.01667 target:self selector:@selector(timerCallback) userInfo:nil repeats:YES];
-}
-- (void)timerCallback
-{
-    if (pageLoaded) {
-        if (progressBar.progress >= 1) {
-            progressBar.hidden = YES;
-            [myTimer invalidate];
-        }
-        else {
-            progressBar.progress += 0.1;
-        }
-    }
-    else {
-        progressBar.progress += 0.05;
-        if (progressBar.progress >= 0.95) {
-            progressBar.progress = 0.95;
-        }
-    }
-}
-
-
-- (void)webViewDidFinishLoad:(UIWebView *)theWebView
-{
-    self.pageLoaded = YES;
-    reloadStopButton.selected = NO;
-    [self updateBackForwardButtons: theWebView];
-}
-
-- (BOOL)webView:(UIWebView *)theWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    BOOL isFrame = ![[[request URL] absoluteString] isEqualToString:[[request mainDocumentURL] absoluteString]];
-    
-    if (isFrame) {
-        //        NSLog(@"Frame: %@", request.URL.absoluteString);
-        
-    } else {
-        //        NSLog(@"Loading: %@", request.URL.absoluteString);
-        
-        NSString *urlLoading = request.URL.absoluteString;
-        if ([urlLoading length] > 0) {
-            [self updateAddressBar: urlLoading];
-            if (![myTimer isValid]) {
-                [self startLoadingProgressBar];
-            }
-        }
-    }
-    
-    //    return ! self.pageLoaded;
-    reloadStopButton.selected = YES;
-    return YES;
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)field
 {
     [field resignFirstResponder];
-    
-    //    [self updateAddressBar: [textField text]];
-    [self loadUrlOrSearch: [textField text]];
-    
+    [self.currentTab loadUrlOrSearch: [textField text]];
     return YES;
 }
 
@@ -113,82 +83,41 @@
     textField.text = url;
 }
 
-- (BOOL) validateUrl: (NSString *) candidate {
-    if ([candidate rangeOfString:@" "].location != NSNotFound ||
-            [candidate rangeOfString:@"."].location == NSNotFound) {
-        return NO;
-    } else {
-        return YES;
-    }
-}
-
-- (void)loadUrlOrSearch:(NSString *)text
+- (void) switchToTabAtIndex:(NSInteger) index
 {
-    if ([self validateUrl:text]) {
-        if ([text rangeOfString:@"://"].location == NSNotFound) {
-            text = [@"http://" stringByAppendingString: text];
-        }
-        NSURLRequest *requestURL = [NSURLRequest requestWithURL:[NSURL URLWithString:text]];
-        [webView loadRequest:requestURL];
-    } else {
-        // TODO Do DuckDuckGo search
-        //        [self updateAddressBar: [NSString stringWithFormat:@"http://www.google.com/search?q=%@", text]];
-        
-        
-//        NSString *unescaped = @"http://www";
-        NSString *charactersToEscape = @"!*'();:@&=+$,/?%#[]\" ";
-        NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:charactersToEscape] invertedSet];
-        NSString *encodedString = [text stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
-        
-        
-        NSURLRequest *requestURL = [NSURLRequest requestWithURL:
-                                    [NSURL URLWithString: [NSString stringWithFormat:@"http://www.google.com/search?q=%@", encodedString]]];
-        
-        [webView loadRequest:requestURL];
+    NSMutableArray *tabs = [FLTRTabsCollection getTabs];
+    for (FLTRTab *tab in tabs) {
+        tab.webView.hidden = YES;
     }
+    FLTRTab *new = [tabs objectAtIndex: index];
     
-}
-
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        
-        webView.scalesPageToFit = YES;
+    self.currentTab = new;
+    
+    if (![[self.tabsView subviews] containsObject: new.webView]) {
+        [self.tabsView addSubview: new.webView];
     }
-    return self;
+    new.webView.hidden = NO;
 }
 
 - (void)viewDidLoad
 {
+    [self switchToTabAtIndex: 0];
+    
+    
+    
+    
+    
     
     progressBar.progress = 0;
     progressBar.hidden = YES;
-    
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.delegate = self;
-    
-    webView.scalesPageToFit = YES;
-    webView.delegate = self;
     
     [reloadStopButton setImage:[UIImage imageNamed:@"reload.png"] forState:UIControlStateNormal];
     [reloadStopButton setImage:[UIImage imageNamed:@"cancel.png"] forState:UIControlStateSelected];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(webViewFinalLoad:)
-                                                 name:@"WebViewProgressFinishedNotification"
-                                               object:webView];
-    
-    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-}
-
-- (void) webViewFinalLoad:(id) sender
-{
-    NSLog(@"NOTIFIED!");
 }
 
 - (void)didReceiveMemoryWarning

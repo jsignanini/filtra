@@ -7,15 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FLTRTab.h"
 
-@interface FLTRViewController : UIViewController <UITextFieldDelegate, UIWebViewDelegate>
+@interface FLTRViewController : UIViewController <UITextFieldDelegate>
 
-@property (nonatomic, strong) IBOutlet UIWebView *webView;
+
+
+@property FLTRTab *currentTab;
+
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UIProgressView *progressBar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *backButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *forwardButton;
 @property (nonatomic, strong) IBOutlet UIButton *reloadStopButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *test;
+@property (strong, nonatomic) IBOutlet UIView *tabsView;
 
 
 @property (nonatomic, strong) NSTimer *myTimer;

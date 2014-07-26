@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A283o" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="OVq-Dn-zKE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="OVq-Dn-zKE">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -45,29 +45,24 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </progressView>
                             <view contentMode="scaleToFill" id="iEb-je-bcd" userLabel="View - Browsers">
-                                <rect key="frame" x="0.0" y="60" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="60" width="320" height="464"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <webView contentMode="scaleToFill" id="n5z-8v-eKF">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </webView>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="dxL-ep-saT" userLabel="Toolbar - Bottom">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem enabled="NO" image="back.png" id="umk-R0-wIy">
+                                    <barButtonItem enabled="NO" image="back.png" id="umk-R0-wIy"/>
+                                    <barButtonItem enabled="NO" image="forward.png" id="7Jd-uE-HXT"/>
+                                    <barButtonItem title="Tabs" id="QAL-eS-7Mt">
                                         <connections>
-                                            <action selector="goBack" destination="n5z-8v-eKF" id="isa-WO-iJr"/>
+                                            <segue destination="ZVn-jK-mng" kind="modal" modalTransitionStyle="partialCurl" id="7wf-uv-HK9"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem enabled="NO" image="forward.png" id="7Jd-uE-HXT">
+                                    <barButtonItem title="Item" id="KLW-wf-w48">
                                         <connections>
-                                            <action selector="goForward" destination="n5z-8v-eKF" id="UzL-Y7-FEf"/>
+                                            <action selector="testclick" destination="OVq-Dn-zKE" id="HRl-Hv-exR"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -80,13 +75,88 @@
                         <outlet property="forwardButton" destination="7Jd-uE-HXT" id="CCt-AX-ITY"/>
                         <outlet property="progressBar" destination="ZMf-cP-dos" id="tAV-ig-P4c"/>
                         <outlet property="reloadStopButton" destination="xrR-kj-Qea" id="3VA-sS-xZi"/>
+                        <outlet property="tabsView" destination="iEb-je-bcd" id="6eW-lh-bQw"/>
+                        <outlet property="test" destination="KLW-wf-w48" id="fNf-Wc-KaU"/>
                         <outlet property="textField" destination="Rg5-Qc-gP5" id="H2v-Rh-GM3"/>
-                        <outlet property="webView" destination="n5z-8v-eKF" id="qEj-0D-gxK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1G4-2k-ySf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-33" y="-43"/>
+        </scene>
+        <!--Tabs View Controller-->
+        <scene sceneID="Jg5-Ct-aFx">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="ZVn-jK-mng" customClass="FLTRTabsViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="skE-tt-tVc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="30" minimumInteritemSpacing="30" id="SnL-JZ-cSH">
+                            <size key="itemSize" width="160" height="302"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="80" minY="0.0" maxX="80" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Tab Cell" id="0vn-VE-kLM" customClass="FLTRTabCell">
+                                <rect key="frame" x="80" y="133" width="160" height="302"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="160" height="302"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page Title" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kdX-uT-QgV">
+                                            <rect key="frame" x="0.0" y="0.0" width="160" height="25"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Hkx-Yg-L3L">
+                                            <rect key="frame" x="0.0" y="25" width="160" height="232"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <outlet property="pageTitle" destination="kdX-uT-QgV" id="93b-Ga-KSh"/>
+                                    <outlet property="screenshot" destination="Hkx-Yg-L3L" id="Wuz-jL-Hww"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell appearanceType="aqua" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="New Tab" id="wSh-3f-t4c" customClass="FLTRTabCell">
+                                <rect key="frame" x="270" y="133" width="160" height="302"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="160" height="302"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dH1-6g-6bI">
+                                            <rect key="frame" x="0.0" y="0.0" width="160" height="302"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                            <state key="normal" title="+">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="newTab:" destination="ZVn-jK-mng" eventType="touchUpInside" id="kKE-UQ-mJM"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="ZVn-jK-mng" id="8Sr-Yx-a9a"/>
+                            <outlet property="delegate" destination="ZVn-jK-mng" id="nkj-7L-vza"/>
+                        </connections>
+                    </collectionView>
+                    <size key="freeformSize" width="320" height="568"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C4b-D0-O0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="321" y="-43"/>
         </scene>
     </scenes>
     <resources>
