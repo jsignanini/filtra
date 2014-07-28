@@ -21,6 +21,7 @@ static FLTRTab *currentTab;
     
     FLTRTab *firstTab = [[FLTRTab alloc] init];
     [tabs addObject: firstTab];
+    [self switchToTabAtIndex: [tabs indexOfObject: firstTab]];
 }
 
 + (id) alloc

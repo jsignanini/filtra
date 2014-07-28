@@ -131,7 +131,6 @@
 - (IBAction)unwindFromModalViewController:(UIStoryboardSegue *)segue
 {
     if ([segue.sourceViewController isKindOfClass:[FLTRTabsViewController class]]) {
-//        FLTRTabsViewController *viewController = segue.sourceViewController;
         [self switchToTabAtIndex: [FLTRTabsCollection getCurrentTabIndex]];
     }
 }

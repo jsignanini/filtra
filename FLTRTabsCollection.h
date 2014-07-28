@@ -12,6 +12,7 @@
 @interface FLTRTabsCollection : NSObject
 
 + (NSMutableArray *) getTabs;
++ (void) switchToTabAtIndex: (int) index;
 + (int) getCurrentTabIndex;
 + (void) createTab;
 
