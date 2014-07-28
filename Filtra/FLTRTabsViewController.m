@@ -17,6 +17,8 @@
 
 @implementation FLTRTabsViewController
 
+@synthesize currentTabIndex;
+
 -(NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView
 {
     return 1;
@@ -41,16 +43,7 @@
         tabCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Tab Cell" forIndexPath:indexPath];
         
         tabCell.pageTitle.text = [tab title];
-        
-        
-        CGRect rect = [tab.webView bounds];
-        UIGraphicsBeginImageContextWithOptions(rect.size, YES, 0.0f);
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        [tab.webView.layer renderInContext:context];
-        UIImage *capturedScreen = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        tabCell.screenshot.image = capturedScreen;
+        tabCell.screenshot.image = [tab screenshot];
     }
     
     return tabCell;
@@ -78,7 +71,8 @@
 
 - (IBAction)newTab:(id)sender
 {
-    
+//    self.currentTabIndex = [FLTRTabsCollection getCurrentTabIndex];
+    [FLTRTabsCollection createTab];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -93,4 +87,7 @@
 }
 */
 
+- (IBAction)clickNewTab:(id)sender {
+    [FLTRTabsCollection createTab];
+}
 @end

@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FLTRTab.h"
 
 @interface FLTRTabsCollection : NSObject
 
 + (NSMutableArray *) getTabs;
++ (int) getCurrentTabIndex;
++ (void) createTab;
 
 @end

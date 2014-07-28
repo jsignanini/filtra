@@ -139,7 +139,8 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="newTab:" destination="ZVn-jK-mng" eventType="touchUpInside" id="kKE-UQ-mJM"/>
+                                                <action selector="clickNewTab:" destination="ZVn-jK-mng" eventType="touchUpInside" id="MxN-wJ-APw"/>
+                                                <segue destination="Dqt-qU-wQ4" kind="unwind" identifier="newTab" unwindAction="unwindFromModalViewController:" id="gf9-eO-0Cx"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -155,6 +156,7 @@
                     <size key="freeformSize" width="320" height="568"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C4b-D0-O0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Dqt-qU-wQ4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="321" y="-43"/>
         </scene>

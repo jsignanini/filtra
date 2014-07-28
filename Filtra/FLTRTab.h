@@ -15,6 +15,8 @@
 @property UIWebView *webView;
 @property NSString *url;
 @property NSString *title;
+@property int iden;
+@property UIImage *screenshot;
 
 - (void)loadUrlOrSearch: (NSString*) text;
 

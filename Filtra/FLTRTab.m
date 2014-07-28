@@ -7,10 +7,11 @@
 //
 
 #import "FLTRTab.h"
+#import "FLTRTabsCollection.h"
 
 @implementation FLTRTab
 
-@synthesize title, url, webView;
+@synthesize title, url, webView, iden, screenshot;
 
 - (id) init
 {
@@ -18,6 +19,8 @@
     self.webView.delegate = self;
     self.webView.scalesPageToFit = YES;
     self.webView.hidden = YES;
+    
+    self.iden = [[FLTRTabsCollection getTabs] count];
     
     NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"newtab" ofType:@"html"];
     NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
@@ -63,6 +66,7 @@
 //    reloadStopButton.selected = NO;
 //    [self updateBackForwardButtons: theWebView];
     self.title = [self.webView stringByEvaluatingJavaScriptFromString: @"document.title"];
+    [self updateScreenshot];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -109,6 +113,17 @@
 - (void)webViewFinalLoad:(id)sender
 {
     NSLog(@"NOTIFIED!");
+}
+
+- (void) updateScreenshot
+{
+    CGRect rect = [self.webView bounds];
+    UIGraphicsBeginImageContextWithOptions(rect.size, YES, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.webView.layer renderInContext:context];
+    UIImage *capturedScreen = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.screenshot = capturedScreen;
 }
 
 

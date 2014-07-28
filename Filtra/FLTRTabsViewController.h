@@ -10,4 +10,7 @@
 
 @interface FLTRTabsViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
+@property int currentTabIndex;
+- (IBAction)clickNewTab:(id)sender;
+
 @end

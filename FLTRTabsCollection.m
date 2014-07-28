@@ -12,18 +12,15 @@
 @implementation FLTRTabsCollection
 
 static NSMutableArray *tabs;
+static FLTRTab *currentTab;
 
 + (void) initialize
 {
     [super initialize];
-
     tabs = [[NSMutableArray alloc] init];
     
     FLTRTab *firstTab = [[FLTRTab alloc] init];
-    FLTRTab *firstTab2 = [[FLTRTab alloc] init];
     [tabs addObject: firstTab];
-    [tabs addObject: firstTab2];
-
 }
 
 + (id) alloc
@@ -37,9 +34,22 @@ static NSMutableArray *tabs;
     return tabs;
 }
 
++ (int) getCurrentTabIndex
+{
+    return [tabs indexOfObject: currentTab];
+}
+
 + (void) createTab
 {
-    [tabs addObject: [[FLTRTab alloc] init]];
+    FLTRTab *newTab = [[FLTRTab alloc] init];
+    [tabs addObject: newTab];
+    currentTab = newTab;
+    [self switchToTabAtIndex: newTab.iden];
+}
+
++ (void) switchToTabAtIndex: (int) index
+{
+    currentTab = [tabs objectAtIndex: index];
 }
 
 

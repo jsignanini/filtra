@@ -7,6 +7,7 @@
 //
 
 #import "FLTRViewController.h"
+#import "FLTRTabsViewController.h"
 #import "FLTRTabsCollection.h"
 
 @interface FLTRViewController ()
@@ -125,6 +126,14 @@
     [super didReceiveMemoryWarning];
     // TODO
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)unwindFromModalViewController:(UIStoryboardSegue *)segue
+{
+    if ([segue.sourceViewController isKindOfClass:[FLTRTabsViewController class]]) {
+//        FLTRTabsViewController *viewController = segue.sourceViewController;
+        [self switchToTabAtIndex: [FLTRTabsCollection getCurrentTabIndex]];
+    }
 }
 
 /*
