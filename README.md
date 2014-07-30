@@ -8,7 +8,7 @@ Filtra is an open source browser for iOS that can filter any NSURLRequest.
 
 ###Todos
 - Add support for bookmarks
-- Add support for multiple tabs
+- Add support for closing tabs
 - Add auto-complete/history to address bar
-- Add search vs URL processing functionality to address bar
 - Add classic browser settings in settings app
+- Add support for changing default search engine
