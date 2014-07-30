@@ -16,30 +16,7 @@
 
 @implementation FLTRViewController
 
-@synthesize tabsView, addressField, progressBar, myTimer, pageLoaded, backButton, forwardButton, reloadStopButton;
-
-- (IBAction)testclick
-{
-//    [UIView animateWithDuration:1.0
-//                     animations:
-//                        ^{
-//                         CGRect frame = self.tabsView.frame;
-//                         frame.size.height = 180.0;
-//                         frame.size.width = 103.0;
-//                         self.tabsView.frame = frame;
-//                     }
-//                     completion:^(BOOL finished){
-//                         // whatever you need to do when animations are complete
-//                     }];
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.75];
-    CGRect frame = self.tabsView.frame;
-    frame.size.height = 180.0;
-    frame.size.width = 103.0;
-    self.tabsView.frame = frame;
-    [UIView commitAnimations];
-
-}
+@synthesize tabsView, addressField, progressBar, backButton, forwardButton, reloadStopButton;
 
 - (IBAction)clickedReloadStopButton:(id)sender
 {
