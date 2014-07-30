@@ -55,6 +55,10 @@
 - (void)webViewLoaded {
     [self resetProgress];
     //    [entryProgressView setProgress: 0.0f animated: YES];
+    NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
+    [userInfo setObject:[NSNumber numberWithFloat: 0.0f] forKey: @"progress"];
+    [userInfo setObject:[NSNumber numberWithBool:NO] forKey: @"animated"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:userInfo];
     [self setTitle: [self.webView stringByEvaluatingJavaScriptFromString: @"document.title"]];
     [self updateScreenshot];
     
@@ -98,6 +102,10 @@
     if (newProgress > currentProgress) {
         currentProgress = newProgress;
         //        [entryProgressView setProgress: newProgress animated: YES];
+        NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
+        [userInfo setObject:[NSNumber numberWithFloat: newProgress] forKey: @"progress"];
+        [userInfo setObject:[NSNumber numberWithBool:YES] forKey: @"animated"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:userInfo];
     }
     
     // Finish progress updates if loading is complete
@@ -106,6 +114,10 @@
         monitorProgress = NO;
         
         //        [entryProgressView setProgress: 1.0 animated: YES];
+        NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
+        [userInfo setObject:[NSNumber numberWithFloat: 1.0f] forKey: @"progress"];
+        [userInfo setObject:[NSNumber numberWithBool:YES] forKey: @"animated"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:userInfo];
         [self performSelector:@selector(webViewLoaded) withObject: nil afterDelay: 1.0];
     }
 }
@@ -124,6 +136,10 @@
     if (newProgress > currentProgress) {
         currentProgress = newProgress;
         //        [entryProgressView setProgress: newProgress animated: YES];
+        NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
+        [userInfo setObject:[NSNumber numberWithFloat: newProgress] forKey: @"progress"];
+        [userInfo setObject:[NSNumber numberWithBool:YES] forKey: @"animated"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:userInfo];
     }
     
     // Finish progress updates if required
@@ -132,6 +148,10 @@
         monitorProgress = NO;
         
         //        [entryProgressView setProgress: 1.0 animated: YES];
+        NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
+        [userInfo setObject:[NSNumber numberWithFloat: 1.0f] forKey: @"progress"];
+        [userInfo setObject:[NSNumber numberWithBool:YES] forKey: @"animated"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:userInfo];
         [self performSelector:@selector(webViewLoaded) withObject: nil afterDelay: 1.0];
     }
 }

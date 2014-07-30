@@ -98,16 +98,25 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewDidLoad)  name:@"webViewLoaded" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewDidStartLoad)  name:@"webViewStartedLoad" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewSentProgress:)  name:@"webViewProgress" object:nil];
+}
+
+- (void) webViewSentProgress: (NSNotification *) notification
+{
+    NSDictionary* userInfo = notification.userInfo;
+    [self.progressBar setProgress:[[userInfo objectForKey:@"progress"] floatValue] animated:[[userInfo objectForKey:@"animated"] boolValue]];
 }
 
 - (void) webViewDidStartLoad
 {
     self.reloadStopButton.selected = YES;
+    [self.progressBar setHidden: NO];
 }
 
 - (void) webViewDidLoad
 {
     self.reloadStopButton.selected = NO;
+    [self.progressBar setHidden: YES];
 }
 
 - (void)didReceiveMemoryWarning
