@@ -123,6 +123,12 @@
     [self.currentTab.webView goForward];
 }
 
+- (IBAction)share:(id)sender
+{
+    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[self.currentTab.webView.request.URL.absoluteString, self.currentTab.webView.request.URL] applicationActivities: nil];
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
 /*
  #pragma mark - Navigation
  

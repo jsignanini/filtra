@@ -77,7 +77,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="efY-2c-wsP"/>
-                                    <barButtonItem systemItem="action" id="FKe-BE-zUX"/>
+                                    <barButtonItem systemItem="action" id="FKe-BE-zUX">
+                                        <connections>
+                                            <action selector="share:" destination="OVq-Dn-zKE" id="Qhm-Z3-OxJ"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
