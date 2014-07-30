@@ -15,7 +15,7 @@
 
 @property FLTRTab *currentTab;
 
-@property (nonatomic, strong) IBOutlet UITextField *textField;
+@property (nonatomic, strong) IBOutlet UITextField *addressField;
 @property (nonatomic, strong) IBOutlet UIProgressView *progressBar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *backButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *forwardButton;

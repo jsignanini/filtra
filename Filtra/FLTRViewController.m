@@ -16,7 +16,7 @@
 
 @implementation FLTRViewController
 
-@synthesize tabsView, textField, progressBar, myTimer, pageLoaded, backButton, forwardButton, reloadStopButton;
+@synthesize tabsView, addressField, progressBar, myTimer, pageLoaded, backButton, forwardButton, reloadStopButton;
 
 - (IBAction)testclick
 {
@@ -66,22 +66,11 @@
     reloadStopButton.selected = !reloadStopButton.selected;
 }
 
-- (void)updateBackForwardButtons:(UIWebView *)theWebView
-{
-    backButton.enabled = theWebView.canGoBack;
-    forwardButton.enabled = theWebView.canGoForward;
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)field
 {
     [field resignFirstResponder];
-    [self.currentTab loadUrlOrSearch: [textField text]];
+    [self.currentTab loadUrlOrSearch: [addressField text]];
     return YES;
-}
-
--(void)updateAddressBar:(NSString *)url
-{
-    textField.text = url;
 }
 
 - (void) switchToTabAtIndex:(NSInteger) index
@@ -98,21 +87,24 @@
         [self.tabsView addSubview: new.webView];
     }
     new.webView.hidden = NO;
+    
+    [self updateUI];
+}
+
+- (void) updateUI
+{
+    [self.addressField setText: self.currentTab.webView.request.URL.absoluteString];
+    [self.backButton setEnabled: self.currentTab.webView.canGoBack];
+    [self.forwardButton setEnabled: self.currentTab.webView.canGoForward];
 }
 
 - (void)viewDidLoad
 {
     [self switchToTabAtIndex: 0];
-    
-    
-    
-    
-    
-    
     progressBar.progress = 0;
     progressBar.hidden = YES;
-    textField.autocorrectionType = UITextAutocorrectionTypeNo;
-    textField.delegate = self;
+    addressField.autocorrectionType = UITextAutocorrectionTypeNo;
+    addressField.delegate = self;
     
     [reloadStopButton setImage:[UIImage imageNamed:@"reload.png"] forState:UIControlStateNormal];
     [reloadStopButton setImage:[UIImage imageNamed:@"cancel.png"] forState:UIControlStateSelected];

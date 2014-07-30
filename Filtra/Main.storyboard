@@ -71,13 +71,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="addressField" destination="Rg5-Qc-gP5" id="hSs-ZF-wru"/>
                         <outlet property="backButton" destination="umk-R0-wIy" id="7YZ-g9-jg4"/>
                         <outlet property="forwardButton" destination="7Jd-uE-HXT" id="CCt-AX-ITY"/>
                         <outlet property="progressBar" destination="ZMf-cP-dos" id="tAV-ig-P4c"/>
                         <outlet property="reloadStopButton" destination="xrR-kj-Qea" id="3VA-sS-xZi"/>
                         <outlet property="tabsView" destination="iEb-je-bcd" id="6eW-lh-bQw"/>
                         <outlet property="test" destination="KLW-wf-w48" id="fNf-Wc-KaU"/>
-                        <outlet property="textField" destination="Rg5-Qc-gP5" id="H2v-Rh-GM3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1G4-2k-ySf" userLabel="First Responder" sceneMemberID="firstResponder"/>

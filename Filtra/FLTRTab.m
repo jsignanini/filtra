@@ -11,7 +11,7 @@
 
 @implementation FLTRTab
 
-@synthesize title, url, webView, iden, screenshot;
+@synthesize title, url, webView, iden, screenshot, framesToLoad, framesLoaded, currentProgress, monitorProgress, completeIfError;
 
 - (id) init
 {
@@ -26,53 +26,119 @@
     NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
     [self.webView loadHTMLString:htmlString baseURL:nil];
     self.title = @"about:tab";
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewFinalLoad:) name:@"WebViewProgressFinishedNotification" object:self.webView];
+    [self resetForNewPage];
     
     return self;
 }
 
 /*** UIWebViewDelegate Protocol ***/
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    
+- (void)resetProgress {
+    framesToLoad = 0;
+    framesLoaded = 0;
+    currentProgress = 0.0f;
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    BOOL isFrame = ![[[request URL] absoluteString] isEqualToString:[[request mainDocumentURL] absoluteString]];
+- (void)resetForNewPage {
+    // Reset progress
+    [self resetProgress];
     
-    if (isFrame) {
-        //        NSLog(@"Frame: %@", request.URL.absoluteString);
-        
-    } else {
-        //        NSLog(@"Loading: %@", request.URL.absoluteString);
-        
-        NSString *urlLoading = request.URL.absoluteString;
-        if ([urlLoading length] > 0) {
-//            [self updateAddressBar: urlLoading];
-        }
-    }
+    // Monitor the page load
+    monitorProgress = YES;
     
-    //    return ! self.pageLoaded;
-//    reloadStopButton.selected = YES;
-    return YES;
+    // Keep going if errors occur
+    // completeIfError = NO;
+    
+    // Stop updates if an error occurs
+    completeIfError = YES;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-//    self.pageLoaded = YES;
-//    reloadStopButton.selected = NO;
-//    [self updateBackForwardButtons: theWebView];
-    self.title = [self.webView stringByEvaluatingJavaScriptFromString: @"document.title"];
+- (void)webViewLoaded {
+    [self resetProgress];
+    //    [entryProgressView setProgress: 0.0f animated: YES];
+    [self setTitle: [self.webView stringByEvaluatingJavaScriptFromString: @"document.title"]];
     [self updateScreenshot];
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    //    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+    //        // Reset state for new page load
+    //        [self resetForNewPage];
+    //    }
     
+    
+    BOOL isFrame = ![[[request URL] absoluteString] isEqualToString:[[request mainDocumentURL] absoluteString]];
+    
+    if (isFrame) {
+    } else {
+        [self resetForNewPage];
+    }
+    
+    return YES;
 }
+
+-(void)webViewDidStartLoad:(UIWebView *)webView {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    if (!monitorProgress) {
+        return;
+    }
+    
+    // Increment frames to load counter
+    framesToLoad++;
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *) aWebView {
+    if (!monitorProgress) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        return;
+    }
+    
+    // Increment frames loaded counter
+    framesLoaded++;
+    
+    // Update progress display
+    float newProgress = ((float) framesLoaded) / framesToLoad;
+    if (newProgress > currentProgress) {
+        currentProgress = newProgress;
+        //        [entryProgressView setProgress: newProgress animated: YES];
+    }
+    
+    // Finish progress updates if loading is complete
+    if (!aWebView.loading) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        monitorProgress = NO;
+        
+        //        [entryProgressView setProgress: 1.0 animated: YES];
+        [self performSelector:@selector(webViewLoaded) withObject: nil afterDelay: 1.0];
+    }
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    if (!monitorProgress) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        return;
+    }
+    
+    // Increment frames loaded counter
+    framesLoaded++;
+    
+    // Update progress display
+    float newProgress = ((float) framesLoaded) / framesToLoad;
+    if (newProgress > currentProgress) {
+        currentProgress = newProgress;
+        //        [entryProgressView setProgress: newProgress animated: YES];
+    }
+    
+    // Finish progress updates if required
+    if (completeIfError) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        monitorProgress = NO;
+        
+        //        [entryProgressView setProgress: 1.0 animated: YES];
+        [self performSelector:@selector(webViewLoaded) withObject: nil afterDelay: 1.0];
+    }
+}
+
+
 
 - (BOOL)validateUrl:(NSString *)candidate {
     if ([candidate rangeOfString:@" "].location != NSNotFound ||
@@ -110,11 +176,6 @@
     
 }
 
-- (void)webViewFinalLoad:(id)sender
-{
-    NSLog(@"NOTIFIED!");
-}
-
 - (void) updateScreenshot
 {
     CGRect rect = [self.webView bounds];
@@ -125,7 +186,6 @@
     UIGraphicsEndImageContext();
     self.screenshot = capturedScreen;
 }
-
 
 
 @end
