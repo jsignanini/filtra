@@ -105,16 +105,19 @@
 {
     NSDictionary* userInfo = notification.userInfo;
     [self.progressBar setProgress:[[userInfo objectForKey:@"progress"] floatValue] animated:[[userInfo objectForKey:@"animated"] boolValue]];
+    [self updateUI];
 }
 
 - (void) webViewDidStartLoad
 {
+    [self updateUI];
     self.reloadStopButton.selected = YES;
     [self.progressBar setHidden: NO];
 }
 
 - (void) webViewDidLoad
 {
+    [self updateUI];
     self.reloadStopButton.selected = NO;
     [self.progressBar setHidden: YES];
 }
@@ -131,6 +134,16 @@
     if ([segue.sourceViewController isKindOfClass:[FLTRTabsViewController class]]) {
         [self switchToTabAtIndex: [FLTRTabsCollection getCurrentTabIndex]];
     }
+}
+
+- (IBAction)webViewGoBack:(id)sender
+{
+    [self.currentTab.webView goBack];
+}
+
+- (IBAction)webViewGoForward:(id)sender
+{
+    [self.currentTab.webView goForward];
 }
 
 /*

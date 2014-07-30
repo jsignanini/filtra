@@ -53,8 +53,16 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem enabled="NO" image="back.png" id="umk-R0-wIy"/>
-                                    <barButtonItem enabled="NO" image="forward.png" id="7Jd-uE-HXT"/>
+                                    <barButtonItem enabled="NO" image="back.png" id="umk-R0-wIy">
+                                        <connections>
+                                            <action selector="webViewGoBack:" destination="OVq-Dn-zKE" id="Pju-hn-eZs"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem enabled="NO" image="forward.png" id="7Jd-uE-HXT">
+                                        <connections>
+                                            <action selector="webViewGoForward:" destination="OVq-Dn-zKE" id="hOA-4Q-C8b"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="Tabs" id="QAL-eS-7Mt">
                                         <connections>
                                             <segue destination="ZVn-jK-mng" kind="modal" modalTransitionStyle="partialCurl" id="7wf-uv-HK9"/>
