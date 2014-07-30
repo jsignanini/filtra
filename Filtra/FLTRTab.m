@@ -57,20 +57,18 @@
     //    [entryProgressView setProgress: 0.0f animated: YES];
     [self setTitle: [self.webView stringByEvaluatingJavaScriptFromString: @"document.title"]];
     [self updateScreenshot];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewLoaded" object:self userInfo:nil];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    //    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
-    //        // Reset state for new page load
-    //        [self resetForNewPage];
-    //    }
-    
-    
     BOOL isFrame = ![[[request URL] absoluteString] isEqualToString:[[request mainDocumentURL] absoluteString]];
     
     if (isFrame) {
+        
     } else {
         [self resetForNewPage];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewStartedLoad" object:self userInfo:nil];
     }
     
     return YES;

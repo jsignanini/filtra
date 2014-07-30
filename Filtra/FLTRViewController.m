@@ -41,29 +41,13 @@
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-- (IBAction)handleReloadStopButtonClick:(id)sender
+- (IBAction)clickedReloadStopButton:(id)sender
 {
-    if (reloadStopButton.selected) {
+    if (self.reloadStopButton.selected) {
         [self.currentTab.webView stopLoading];
     } else {
         [self.currentTab.webView reload];
     }
-    
-    reloadStopButton.selected = !reloadStopButton.selected;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)field
@@ -111,6 +95,19 @@
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewDidLoad)  name:@"webViewLoaded" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewDidStartLoad)  name:@"webViewStartedLoad" object:nil];
+}
+
+- (void) webViewDidStartLoad
+{
+    self.reloadStopButton.selected = YES;
+}
+
+- (void) webViewDidLoad
+{
+    self.reloadStopButton.selected = NO;
 }
 
 - (void)didReceiveMemoryWarning

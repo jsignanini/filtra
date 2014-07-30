@@ -31,7 +31,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="reload.png"/>
                                                 <connections>
-                                                    <action selector="handleReloadStopButtonClick:" destination="OVq-Dn-zKE" eventType="touchUpInside" id="2d0-os-lsk"/>
+                                                    <action selector="clickedReloadStopButton:" destination="OVq-Dn-zKE" eventType="touchUpInside" id="c5a-JV-ZSX"/>
                                                 </connections>
                                             </button>
                                         </subviews>
