@@ -7,13 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FLTRTab.h"
 
 @interface FLTRTabsCollection : NSObject
 
 + (NSMutableArray *) getTabs;
-+ (void) switchToTabAtIndex: (int) index;
-+ (int) getCurrentTabIndex;
-+ (void) createTab;
++ (void) switchToTabAtIndex: (NSUInteger) index;
++ (NSUInteger) getCurrentTabIndex;
++ (void) createTab: (NSString*) url;
 
 @end

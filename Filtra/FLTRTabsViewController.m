@@ -72,7 +72,7 @@
 - (IBAction)newTab:(id)sender
 {
 //    self.currentTabIndex = [FLTRTabsCollection getCurrentTabIndex];
-    [FLTRTabsCollection createTab];
+    [FLTRTabsCollection createTab: nil];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -89,11 +89,12 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [FLTRTabsCollection switchToTabAtIndex: indexPath.row];
+    [FLTRTabsCollection switchToTabAtIndex: (unsigned long)indexPath.row];
     [self performSegueWithIdentifier:@"newTab" sender:self];
 }
 
 - (IBAction)clickNewTab:(id)sender {
-    [FLTRTabsCollection createTab];
+    [FLTRTabsCollection createTab: nil];
 }
+
 @end

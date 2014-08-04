@@ -15,7 +15,7 @@
 @property UIWebView *webView;
 @property NSString *url;
 @property NSString *title;
-@property int iden;
+@property NSUInteger iden;
 @property UIImage *screenshot;
 
 @property int framesToLoad;
@@ -24,7 +24,7 @@
 @property BOOL monitorProgress;
 @property BOOL completeIfError;
 
-- (void)loadUrlOrSearch: (NSString*) text;
+- (void) loadUrlOrSearch: (NSString*) text;
 
 //- (NSString*) getTitle;
 

@@ -100,12 +100,10 @@
             </objects>
             <point key="canvasLocation" x="-33" y="-43"/>
         </scene>
-        <!--View Controller-->
+        <!--Bookmarks View Controller-->
         <scene sceneID="AJF-dq-dnL">
             <objects>
-                <exit id="k6y-wD-ZJu" userLabel="Exit" sceneMemberID="exit"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wgW-xj-yIu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="eUe-gR-hfZ" sceneMemberID="viewController">
+                <viewController id="eUe-gR-hfZ" customClass="FLTRBookmarksViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CKn-rb-qzh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -115,12 +113,16 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Bookmarks" id="WXL-3h-Zb4">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Fxq-ms-XnZ">
+                                        <barButtonItem key="leftBarButtonItem" title="Edit" id="5yo-tN-KI8">
+                                            <connections>
+                                                <action selector="clickEdit:" destination="eUe-gR-hfZ" id="06T-xF-7iF"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Fxq-ms-XnZ">
                                             <connections>
                                                 <segue destination="k6y-wD-ZJu" kind="unwind" unwindAction="unwindFromModalViewController:" id="LP3-w1-ODa"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bOk-fS-uAx"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -128,11 +130,44 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Bookmark" id="LjL-N2-9Ii" customClass="FLTRBookmarkCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LjL-N2-9Ii" id="F4Y-S3-GWY">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IIJ-Bh-hFE">
+                                                    <rect key="frame" x="60" y="11" width="251" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="r3p-Nj-BkI">
+                                                    <rect key="frame" x="17" y="4" width="35" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="faviconView" destination="r3p-Nj-BkI" id="n9J-RQ-Njb"/>
+                                            <outlet property="titleLabel" destination="IIJ-Bh-hFE" id="YSm-ML-GMG"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="editButton" destination="5yo-tN-KI8" id="clR-Eb-oBh"/>
+                        <outlet property="tableView" destination="hbs-5W-m6Y" id="VpD-mb-T1V"/>
+                    </connections>
                 </viewController>
+                <exit id="k6y-wD-ZJu" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wgW-xj-yIu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="534" y="603"/>
         </scene>

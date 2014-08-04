@@ -35,20 +35,23 @@ static FLTRTab *currentTab;
     return tabs;
 }
 
-+ (int) getCurrentTabIndex
++ (NSUInteger) getCurrentTabIndex
 {
     return [tabs indexOfObject: currentTab];
 }
 
-+ (void) createTab
++ (void) createTab: (NSString*) url
 {
     FLTRTab *newTab = [[FLTRTab alloc] init];
     [tabs addObject: newTab];
     currentTab = newTab;
+    if (url != nil) {
+        [newTab loadUrlOrSearch: url];
+    }
     [self switchToTabAtIndex: newTab.iden];
 }
 
-+ (void) switchToTabAtIndex: (int) index
++ (void) switchToTabAtIndex: (NSUInteger) index
 {
     currentTab = [tabs objectAtIndex: index];
 }

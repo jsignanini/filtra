@@ -9,6 +9,7 @@
 #import "FLTRViewController.h"
 #import "FLTRTabsViewController.h"
 #import "FLTRTabsCollection.h"
+#import "FLTRBookmarkActivity.h"
 
 @interface FLTRViewController ()
 
@@ -16,7 +17,7 @@
 
 @implementation FLTRViewController
 
-@synthesize tabsView, addressField, progressBar, backButton, forwardButton, reloadStopButton;
+@synthesize tabsView, addressField, progressBar, backButton, forwardButton, reloadStopButton, activityView;
 
 - (IBAction)clickedReloadStopButton:(id)sender
 {
@@ -34,7 +35,7 @@
     return YES;
 }
 
-- (void) switchToTabAtIndex:(NSInteger) index
+- (void) switchToTabAtIndex:(NSUInteger) index
 {
     NSMutableArray *tabs = [FLTRTabsCollection getTabs];
     for (FLTRTab *tab in tabs) {
@@ -76,6 +77,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewDidLoad)  name:@"webViewLoaded" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewDidStartLoad)  name:@"webViewStartedLoad" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewSentProgress:)  name:@"webViewProgress" object:nil];
+    
+    
+    
 }
 
 - (void) webViewSentProgress: (NSNotification *) notification
@@ -125,8 +129,9 @@
 
 - (IBAction)share:(id)sender
 {
-    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[self.currentTab.webView.request.URL.absoluteString, self.currentTab.webView.request.URL] applicationActivities: nil];
-    [self presentViewController:controller animated:YES completion:nil];
+    FLTRBookmarkActivity *activity = [[FLTRBookmarkActivity alloc] init];
+    self.activityView = [[UIActivityViewController alloc] initWithActivityItems:@[self.currentTab.webView.request.URL.absoluteString, self.currentTab.webView.request.URL] applicationActivities: [NSArray arrayWithObject:activity]];
+    [self presentViewController:self.activityView animated:YES completion: nil];
 }
 
 /*

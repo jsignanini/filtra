@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB2F88781989D81B00852A5B /* FLTRBookmarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2F88771989D81B00852A5B /* FLTRBookmarksViewController.m */; };
+		EB4254E81989E1DC00E4C344 /* FLTRBookmarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4254E71989E1DC00E4C344 /* FLTRBookmarkCell.m */; };
+		EB4254EB1989E1E900E4C344 /* FLTRBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4254EA1989E1E900E4C344 /* FLTRBookmark.m */; };
+		EB44E9591989E37E007EE74F /* FLTRBookmarksCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = EB44E9581989E37E007EE74F /* FLTRBookmarksCollection.m */; };
+		EB50CB9B198EDC7D001AC515 /* FLTRBookmarkActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = EB50CB9A198EDC7D001AC515 /* FLTRBookmarkActivity.m */; };
+		EB50CBA3198F1024001AC515 /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = EB50CBA2198F1024001AC515 /* bookmark.png */; };
 		EB81E09A197DEF9700AFFB4B /* FLTRTabsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB81E099197DEF9700AFFB4B /* FLTRTabsViewController.m */; };
 		EB81E09D197DEFED00AFFB4B /* FLTRTabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB81E09C197DEFED00AFFB4B /* FLTRTabCell.m */; };
 		EB81E0A0197DF53F00AFFB4B /* FLTRTabsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = EB81E09F197DF53F00AFFB4B /* FLTRTabsCollection.m */; };
@@ -48,6 +54,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EB2F88761989D81B00852A5B /* FLTRBookmarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTRBookmarksViewController.h; sourceTree = "<group>"; };
+		EB2F88771989D81B00852A5B /* FLTRBookmarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTRBookmarksViewController.m; sourceTree = "<group>"; };
+		EB4254E61989E1DC00E4C344 /* FLTRBookmarkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTRBookmarkCell.h; sourceTree = "<group>"; };
+		EB4254E71989E1DC00E4C344 /* FLTRBookmarkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTRBookmarkCell.m; sourceTree = "<group>"; };
+		EB4254E91989E1E900E4C344 /* FLTRBookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTRBookmark.h; sourceTree = "<group>"; };
+		EB4254EA1989E1E900E4C344 /* FLTRBookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTRBookmark.m; sourceTree = "<group>"; };
+		EB44E9571989E37E007EE74F /* FLTRBookmarksCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTRBookmarksCollection.h; sourceTree = "<group>"; };
+		EB44E9581989E37E007EE74F /* FLTRBookmarksCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTRBookmarksCollection.m; sourceTree = "<group>"; };
+		EB50CB99198EDC7D001AC515 /* FLTRBookmarkActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTRBookmarkActivity.h; sourceTree = "<group>"; };
+		EB50CB9A198EDC7D001AC515 /* FLTRBookmarkActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTRBookmarkActivity.m; sourceTree = "<group>"; };
+		EB50CBA2198F1024001AC515 /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
 		EB81E098197DEF9700AFFB4B /* FLTRTabsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTRTabsViewController.h; sourceTree = "<group>"; };
 		EB81E099197DEF9700AFFB4B /* FLTRTabsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTRTabsViewController.m; sourceTree = "<group>"; };
 		EB81E09B197DEFED00AFFB4B /* FLTRTabCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTRTabCell.h; sourceTree = "<group>"; };
@@ -160,18 +177,28 @@
 				EBC4E762191F26FB0043E95D /* FLTRViewController.m */,
 				EB81E098197DEF9700AFFB4B /* FLTRTabsViewController.h */,
 				EB81E099197DEF9700AFFB4B /* FLTRTabsViewController.m */,
+				EB81E09B197DEFED00AFFB4B /* FLTRTabCell.h */,
+				EB81E09C197DEFED00AFFB4B /* FLTRTabCell.m */,
+				EB2F88761989D81B00852A5B /* FLTRBookmarksViewController.h */,
+				EB2F88771989D81B00852A5B /* FLTRBookmarksViewController.m */,
+				EB4254E61989E1DC00E4C344 /* FLTRBookmarkCell.h */,
+				EB4254E71989E1DC00E4C344 /* FLTRBookmarkCell.m */,
+				EBC4E71F191F25D40043E95D /* Supporting Files */,
 				EBC4E75C191F26C00043E95D /* FLTRRequestListener.h */,
 				EBC4E75D191F26C00043E95D /* FLTRRequestListener.m */,
 				EBC4E727191F25D40043E95D /* FLTRAppDelegate.h */,
 				EBC4E728191F25D40043E95D /* FLTRAppDelegate.m */,
 				EBC4E72A191F25D40043E95D /* Images.xcassets */,
-				EBC4E71F191F25D40043E95D /* Supporting Files */,
-				EB81E09B197DEFED00AFFB4B /* FLTRTabCell.h */,
-				EB81E09C197DEFED00AFFB4B /* FLTRTabCell.m */,
 				EB81E09E197DF53F00AFFB4B /* FLTRTabsCollection.h */,
 				EB81E09F197DF53F00AFFB4B /* FLTRTabsCollection.m */,
 				EB81E0A1197DF56600AFFB4B /* FLTRTab.h */,
 				EB81E0A2197DF56600AFFB4B /* FLTRTab.m */,
+				EB44E9571989E37E007EE74F /* FLTRBookmarksCollection.h */,
+				EB44E9581989E37E007EE74F /* FLTRBookmarksCollection.m */,
+				EB4254E91989E1E900E4C344 /* FLTRBookmark.h */,
+				EB4254EA1989E1E900E4C344 /* FLTRBookmark.m */,
+				EB50CB99198EDC7D001AC515 /* FLTRBookmarkActivity.h */,
+				EB50CB9A198EDC7D001AC515 /* FLTRBookmarkActivity.m */,
 			);
 			path = Filtra;
 			sourceTree = "<group>";
@@ -216,6 +243,7 @@
 		EBC4E748191F265A0043E95D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EB50CBA2198F1024001AC515 /* bookmark.png */,
 				EBC4E749191F26620043E95D /* back.png */,
 				EBC4E74A191F26620043E95D /* back@2x.png */,
 				EBC4E74B191F26620043E95D /* cancel.png */,
@@ -276,6 +304,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "José María Signanini";
 				TargetAttributes = {
+					EBC4E714191F25D40043E95D = {
+						DevelopmentTeam = ZDS2SVVLA6;
+					};
 					EBC4E72F191F25D50043E95D = {
 						TestTargetID = EBC4E714191F25D40043E95D;
 					};
@@ -312,6 +343,7 @@
 				EBC4E760191F26DC0043E95D /* Main.storyboard in Resources */,
 				EBC4E758191F26620043E95D /* reload@2x.png in Resources */,
 				EB81E0A6197F58FD00AFFB4B /* newtab.html in Resources */,
+				EB50CBA3198F1024001AC515 /* bookmark.png in Resources */,
 				EBC4E72B191F25D40043E95D /* Images.xcassets in Resources */,
 				EBC4E753191F26620043E95D /* cancel.png in Resources */,
 				EBC4E754191F26620043E95D /* cancel@2x.png in Resources */,
@@ -338,10 +370,15 @@
 				EB81E09D197DEFED00AFFB4B /* FLTRTabCell.m in Sources */,
 				EB81E0A0197DF53F00AFFB4B /* FLTRTabsCollection.m in Sources */,
 				EB81E0A3197DF56600AFFB4B /* FLTRTab.m in Sources */,
+				EB4254EB1989E1E900E4C344 /* FLTRBookmark.m in Sources */,
 				EB81E09A197DEF9700AFFB4B /* FLTRTabsViewController.m in Sources */,
+				EB4254E81989E1DC00E4C344 /* FLTRBookmarkCell.m in Sources */,
+				EB2F88781989D81B00852A5B /* FLTRBookmarksViewController.m in Sources */,
 				EBC4E725191F25D40043E95D /* main.m in Sources */,
+				EB44E9591989E37E007EE74F /* FLTRBookmarksCollection.m in Sources */,
 				EBC4E763191F26FB0043E95D /* FLTRViewController.m in Sources */,
 				EBC4E75E191F26C00043E95D /* FLTRRequestListener.m in Sources */,
+				EB50CB9B198EDC7D001AC515 /* FLTRBookmarkActivity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,11 +495,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Filtra/Filtra-Prefix.pch";
 				INFOPLIST_FILE = "Filtra/Filtra-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -472,11 +512,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Filtra/Filtra-Prefix.pch";
 				INFOPLIST_FILE = "Filtra/Filtra-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

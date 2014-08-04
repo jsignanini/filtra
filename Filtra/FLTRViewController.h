@@ -21,5 +21,6 @@
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *forwardButton;
 @property (nonatomic, strong) IBOutlet UIButton *reloadStopButton;
 @property (strong, nonatomic) IBOutlet UIView *tabsView;
+@property (strong, nonatomic) UIActivityViewController *activityView;
 
 @end
