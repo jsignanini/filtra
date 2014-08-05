@@ -24,7 +24,7 @@
 {
     FLTRBookmark *bookmark = [FLTRBookmarksCollection getBookmarks][[indexPath row]];
     [FLTRTabsCollection createTab: bookmark.url.absoluteString];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self performSegueWithIdentifier:@"bookmarkSelected" sender:self];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

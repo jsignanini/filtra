@@ -10,6 +10,7 @@
 #import "FLTRTabsViewController.h"
 #import "FLTRTabsCollection.h"
 #import "FLTRBookmarkActivity.h"
+#import "FLTRBookmarksViewController.h"
 
 @interface FLTRViewController ()
 
@@ -112,7 +113,8 @@
 
 - (IBAction)unwindFromModalViewController:(UIStoryboardSegue *)segue
 {
-    if ([segue.sourceViewController isKindOfClass:[FLTRTabsViewController class]]) {
+    if ([segue.sourceViewController isKindOfClass:[FLTRTabsViewController class]]
+        || [segue.sourceViewController isKindOfClass:[FLTRBookmarksViewController class]]) {
         [self switchToTabAtIndex: [FLTRTabsCollection getCurrentTabIndex]];
     }
 }

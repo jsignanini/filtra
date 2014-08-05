@@ -154,6 +154,7 @@
                                         <connections>
                                             <outlet property="faviconView" destination="r3p-Nj-BkI" id="n9J-RQ-Njb"/>
                                             <outlet property="titleLabel" destination="IIJ-Bh-hFE" id="YSm-ML-GMG"/>
+                                            <segue destination="k6y-wD-ZJu" kind="unwind" identifier="bookmarkSelected" trigger="accessoryAction" unwindAction="unwindFromModalViewController:" id="GDo-Ba-1Qx"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

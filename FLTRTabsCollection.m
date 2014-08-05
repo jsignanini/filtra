@@ -44,7 +44,6 @@ static FLTRTab *currentTab;
 {
     FLTRTab *newTab = [[FLTRTab alloc] init];
     [tabs addObject: newTab];
-    currentTab = newTab;
     if (url != nil) {
         [newTab loadUrlOrSearch: url];
     }
