@@ -19,6 +19,7 @@
     self.webView.delegate = self;
     self.webView.scalesPageToFit = YES;
     self.webView.hidden = YES;
+    [self.webView setAutoresizingMask:(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth)];
     
     self.iden = [[FLTRTabsCollection getTabs] count];
     
