@@ -12,5 +12,6 @@
 
 @property int currentTabIndex;
 - (IBAction)clickNewTab:(id)sender;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end

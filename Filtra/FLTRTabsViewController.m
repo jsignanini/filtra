@@ -17,7 +17,7 @@
 
 @implementation FLTRTabsViewController
 
-@synthesize currentTabIndex;
+@synthesize currentTabIndex, collectionView;
 
 -(NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView
 {
@@ -29,18 +29,18 @@
     return [[FLTRTabsCollection getTabs] count] + 1;
 }
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+-(UICollectionViewCell *)collectionView:(UICollectionView *)aCollectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     long row = [indexPath row];
     FLTRTabCell *tabCell;
     FLTRTab *tab;
     
-    if ([collectionView numberOfItemsInSection: 0] == row + 1) {
-        tabCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"New Tab" forIndexPath:indexPath];
+    if ([aCollectionView numberOfItemsInSection: 0] == row + 1) {
+        tabCell = [aCollectionView dequeueReusableCellWithReuseIdentifier:@"New Tab" forIndexPath:indexPath];
         
     } else {
         tab = [FLTRTabsCollection getTabs][row];
-        tabCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Tab Cell" forIndexPath:indexPath];
+        tabCell = [aCollectionView dequeueReusableCellWithReuseIdentifier:@"Tab Cell" forIndexPath:indexPath];
         
         tabCell.pageTitle.text = [tab title];
         tabCell.screenshot.image = [tab screenshot];
@@ -62,6 +62,16 @@
 {
     [super viewDidLoad];
 }
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    // TODO this seems to be fired several times
+    [self.collectionView
+     scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[FLTRTabsCollection getCurrentTabIndex] inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+
+}
+
 
 - (void)didReceiveMemoryWarning
 {

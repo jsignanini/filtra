@@ -242,6 +242,9 @@
                         </connections>
                     </collectionView>
                     <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="collectionView" destination="skE-tt-tVc" id="JYg-of-XFO"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C4b-D0-O0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Dqt-qU-wQ4" userLabel="Exit" sceneMemberID="exit"/>
