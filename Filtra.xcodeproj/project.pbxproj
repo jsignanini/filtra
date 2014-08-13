@@ -129,12 +129,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EB81E0A4197F58B300AFFB4B /* html */ = {
+		EB81E0A4197F58B300AFFB4B /* HTML */ = {
 			isa = PBXGroup;
 			children = (
 				EB81E0A5197F58FD00AFFB4B /* newtab.html */,
 			);
-			name = html;
+			name = HTML;
+			path = Filtra;
 			sourceTree = "<group>";
 		};
 		EBC4E70C191F25D40043E95D = {
@@ -172,7 +173,6 @@
 		EBC4E71E191F25D40043E95D /* Filtra */ = {
 			isa = PBXGroup;
 			children = (
-				EB81E0A4197F58B300AFFB4B /* html */,
 				EBC4E761191F26FB0043E95D /* FLTRViewController.h */,
 				EBC4E762191F26FB0043E95D /* FLTRViewController.m */,
 				EB81E098197DEF9700AFFB4B /* FLTRTabsViewController.h */,
@@ -235,6 +235,7 @@
 		EBC4E747191F26550043E95D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EB81E0A4197F58B300AFFB4B /* HTML */,
 				EBC4E748191F265A0043E95D /* Images */,
 			);
 			name = Resources;

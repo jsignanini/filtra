@@ -18,12 +18,6 @@
 @property NSUInteger iden;
 @property UIImage *screenshot;
 
-@property int framesToLoad;
-@property int framesLoaded;
-@property float currentProgress;
-@property BOOL monitorProgress;
-@property BOOL completeIfError;
-
 - (void) loadUrlOrSearch: (NSString*) text;
 
 //- (NSString*) getTitle;

@@ -75,7 +75,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewDidLoad)  name:@"webViewLoaded" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewDidFinishLoad)  name:@"webViewFinishedLoad" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewDidStartLoad)  name:@"webViewStartedLoad" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewSentProgress:)  name:@"webViewProgress" object:nil];
     
@@ -85,22 +85,33 @@
 
 - (void) webViewSentProgress: (NSNotification *) notification
 {
-    NSDictionary* userInfo = notification.userInfo;
-    [self.progressBar setProgress:[[userInfo objectForKey:@"progress"] floatValue] animated:[[userInfo objectForKey:@"animated"] boolValue]];
+//    NSDictionary* userInfo = notification.userInfo;
+//    [self.progressBar setProgress:[[userInfo objectForKey:@"progress"] floatValue] animated:[[userInfo objectForKey:@"animated"] boolValue]];
+    if (self.progressBar.progress < 0.9f) {
+        [self.progressBar setProgress: self.progressBar.progress+0.1f animated: YES];
+    }
     [self updateUI];
 }
 
 - (void) webViewDidStartLoad
 {
-    [self updateUI];
+//    [self updateUI];
     self.reloadStopButton.selected = YES;
+    [self.progressBar setProgress: 0.0f animated: NO];
     [self.progressBar setHidden: NO];
+    [self.progressBar setProgress: 0.1f animated: YES];
 }
 
-- (void) webViewDidLoad
+- (void) webViewDidFinishLoad
 {
     [self updateUI];
     self.reloadStopButton.selected = NO;
+    [self.progressBar setProgress: 1.0f animated: YES];
+    [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(hideProgressBar) userInfo:nil repeats:NO];
+}
+
+- (void) hideProgressBar
+{
     [self.progressBar setHidden: YES];
 }
 

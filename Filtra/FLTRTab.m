@@ -11,7 +11,7 @@
 
 @implementation FLTRTab
 
-@synthesize title, url, webView, iden, screenshot, framesToLoad, framesLoaded, currentProgress, monitorProgress, completeIfError;
+@synthesize title, url, webView, iden, screenshot;
 
 - (id) init
 {
@@ -26,137 +26,63 @@
     NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"newtab" ofType:@"html"];
     NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
     [self.webView loadHTMLString:htmlString baseURL:nil];
-    [self resetForNewPage];
     
     return self;
 }
 
 /*** UIWebViewDelegate Protocol ***/
-- (void)resetProgress {
-    framesToLoad = 0;
-    framesLoaded = 0;
-    currentProgress = 0.0f;
-}
-
-- (void)resetForNewPage {
-    // Reset progress
-    [self resetProgress];
-    
-    // Monitor the page load
-    monitorProgress = YES;
-    
-    // Keep going if errors occur
-    // completeIfError = NO;
-    
-    // Stop updates if an error occurs
-    completeIfError = YES;
-}
-
-- (void)webViewLoaded {
-    [self resetProgress];
-    //    [entryProgressView setProgress: 0.0f animated: YES];
-    NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
-    [userInfo setObject:[NSNumber numberWithFloat: 0.0f] forKey: @"progress"];
-    [userInfo setObject:[NSNumber numberWithBool:NO] forKey: @"animated"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:userInfo];
-    [self setTitle: [self.webView stringByEvaluatingJavaScriptFromString: @"document.title"]];
-    [self updateScreenshot];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewLoaded" object:self userInfo:nil];
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+- (BOOL)webView:(UIWebView *)aWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
     BOOL isFrame = ![[[request URL] absoluteString] isEqualToString:[[request mainDocumentURL] absoluteString]];
     
     if (isFrame) {
+        if ([[[request URL] scheme] isEqualToString: @"fltr"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewFinishedLoad" object:self userInfo:nil];
+            return NO;
+        }
         
     } else {
-        [self resetForNewPage];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewStartedLoad" object:self userInfo:nil];
     }
     
     return YES;
 }
 
--(void)webViewDidStartLoad:(UIWebView *)webView {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    if (!monitorProgress) {
-        return;
-    }
-    
-    // Increment frames to load counter
-    framesToLoad++;
+-(void)webViewDidStartLoad:(UIWebView *)aWebView
+{
 }
 
--(void)webViewDidFinishLoad:(UIWebView *) aWebView {
-    if (!monitorProgress) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        return;
-    }
+-(void)webViewDidFinishLoad:(UIWebView *) aWebView
+{
+    [aWebView stringByEvaluatingJavaScriptFromString:
+                      @"if (!window.FLTR) {"
+                            "function pageLoaded() {"
+                                "var s = document.createElement('iframe');"
+                                "s.setAttribute('src', 'fltr://pageLoaded');"
+                                "s.setAttribute('width', '1px');"
+                                "s.setAttribute('height', '1px');"
+                                "document.body.appendChild(s);"
+                                "document.body.removeChild(s);"
+                            "}"
+
+                            "if (document.readyState != 'complete') {"
+                                "window.addEventListener('load', pageLoaded, true);"
+                            "} else {"
+                                "pageLoaded();"
+                            "}"
+                            "window.FLTR = true;"
+                        "}"
+                  ];
     
-    // Increment frames loaded counter
-    framesLoaded++;
-    
-    // Update progress display
-    float newProgress = ((float) framesLoaded) / framesToLoad;
-    if (newProgress > currentProgress) {
-        currentProgress = newProgress;
-        //        [entryProgressView setProgress: newProgress animated: YES];
-        NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
-        [userInfo setObject:[NSNumber numberWithFloat: newProgress] forKey: @"progress"];
-        [userInfo setObject:[NSNumber numberWithBool:YES] forKey: @"animated"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:userInfo];
-    }
-    
-    // Finish progress updates if loading is complete
-    if (!aWebView.loading) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        monitorProgress = NO;
-        
-        //        [entryProgressView setProgress: 1.0 animated: YES];
-        NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
-        [userInfo setObject:[NSNumber numberWithFloat: 1.0f] forKey: @"progress"];
-        [userInfo setObject:[NSNumber numberWithBool:YES] forKey: @"animated"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:userInfo];
-        [self performSelector:@selector(webViewLoaded) withObject: nil afterDelay: 1.0];
-    }
+//    NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
+//    [userInfo setObject:[NSNumber numberWithFloat: 0.0f] forKey: @"progress"];
+//    [userInfo setObject:[NSNumber numberWithBool: NO] forKey: @"animated"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:nil];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    if (!monitorProgress) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        return;
-    }
-    
-    // Increment frames loaded counter
-    framesLoaded++;
-    
-    // Update progress display
-    float newProgress = ((float) framesLoaded) / framesToLoad;
-    if (newProgress > currentProgress) {
-        currentProgress = newProgress;
-        //        [entryProgressView setProgress: newProgress animated: YES];
-        NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
-        [userInfo setObject:[NSNumber numberWithFloat: newProgress] forKey: @"progress"];
-        [userInfo setObject:[NSNumber numberWithBool:YES] forKey: @"animated"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:userInfo];
-    }
-    
-    // Finish progress updates if required
-    if (completeIfError) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        monitorProgress = NO;
-        
-        //        [entryProgressView setProgress: 1.0 animated: YES];
-        NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
-        [userInfo setObject:[NSNumber numberWithFloat: 1.0f] forKey: @"progress"];
-        [userInfo setObject:[NSNumber numberWithBool:YES] forKey: @"animated"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:userInfo];
-        [self performSelector:@selector(webViewLoaded) withObject: nil afterDelay: 1.0];
-    }
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
 }
-
-
 
 - (BOOL)validateUrl:(NSString *)candidate {
     if ([candidate rangeOfString:@" "].location != NSNotFound ||
@@ -204,6 +130,5 @@
     UIGraphicsEndImageContext();
     self.screenshot = capturedScreen;
 }
-
 
 @end
