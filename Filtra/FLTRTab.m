@@ -78,6 +78,7 @@
 //    [userInfo setObject:[NSNumber numberWithFloat: 0.0f] forKey: @"progress"];
 //    [userInfo setObject:[NSNumber numberWithBool: NO] forKey: @"animated"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:nil];
+    [self updateScreenshot];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
