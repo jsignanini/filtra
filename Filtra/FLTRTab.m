@@ -79,6 +79,7 @@
 //    [userInfo setObject:[NSNumber numberWithBool: NO] forKey: @"animated"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"webViewProgress" object:self userInfo:nil];
     [self updateScreenshot];
+    self.title = [aWebView stringByEvaluatingJavaScriptFromString: @"document.title"];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error

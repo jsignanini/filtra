@@ -11,6 +11,7 @@
 #import "FLTRTabsCollection.h"
 #import "FLTRBookmarkActivity.h"
 #import "FLTRBookmarksViewController.h"
+#import "FLTRBookmarkAddViewController.h"
 
 @interface FLTRViewController ()
 
@@ -80,7 +81,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webViewSentProgress:)  name:@"webViewProgress" object:nil];
     
     
-    
+
 }
 
 - (void) webViewSentProgress: (NSNotification *) notification
@@ -144,7 +145,24 @@
 {
     FLTRBookmarkActivity *activity = [[FLTRBookmarkActivity alloc] init];
     self.activityView = [[UIActivityViewController alloc] initWithActivityItems:@[self.currentTab.webView.request.URL.absoluteString, self.currentTab.webView.request.URL] applicationActivities: [NSArray arrayWithObject:activity]];
+    
+    __unsafe_unretained typeof(self) weakSelf = self;
+    [self.activityView setCompletionHandler:^(NSString *activity, BOOL success) {
+        if ([activity isEqualToString: @"filtra.bookmark"]) {
+            [weakSelf performSegueWithIdentifier:@"Bookmark Edit" sender:weakSelf];
+        }
+    }];
+    
     [self presentViewController:self.activityView animated:YES completion: nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString: @"Bookmark Edit"]) {
+        FLTRBookmarkAddViewController *controller = (FLTRBookmarkAddViewController *) segue.destinationViewController;
+        controller.url = self.currentTab.webView.request.URL.absoluteString;
+        controller.title = self.currentTab.title;
+    }
 }
 
 /*

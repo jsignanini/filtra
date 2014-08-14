@@ -40,7 +40,6 @@
 
 - (void)performActivity
 {
-    [FLTRBookmarksCollection addBookmarkWithUrl:self.url title:self.url];
     [self activityDidFinish: YES];
 }
 

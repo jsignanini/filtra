@@ -13,6 +13,8 @@
 		EB44E9591989E37E007EE74F /* FLTRBookmarksCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = EB44E9581989E37E007EE74F /* FLTRBookmarksCollection.m */; };
 		EB50CB9B198EDC7D001AC515 /* FLTRBookmarkActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = EB50CB9A198EDC7D001AC515 /* FLTRBookmarkActivity.m */; };
 		EB50CBA3198F1024001AC515 /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = EB50CBA2198F1024001AC515 /* bookmark.png */; };
+		EB680F9B199C3C4600CF5B8B /* FLTRBookmarkAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB680F9A199C3C4600CF5B8B /* FLTRBookmarkAddViewController.m */; };
+		EB680F9E199C504200CF5B8B /* FLTRBookmarkAddCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB680F9D199C504200CF5B8B /* FLTRBookmarkAddCell.m */; };
 		EB81E09A197DEF9700AFFB4B /* FLTRTabsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB81E099197DEF9700AFFB4B /* FLTRTabsViewController.m */; };
 		EB81E09D197DEFED00AFFB4B /* FLTRTabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB81E09C197DEFED00AFFB4B /* FLTRTabCell.m */; };
 		EB81E0A0197DF53F00AFFB4B /* FLTRTabsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = EB81E09F197DF53F00AFFB4B /* FLTRTabsCollection.m */; };
@@ -65,6 +67,10 @@
 		EB50CB99198EDC7D001AC515 /* FLTRBookmarkActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTRBookmarkActivity.h; sourceTree = "<group>"; };
 		EB50CB9A198EDC7D001AC515 /* FLTRBookmarkActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTRBookmarkActivity.m; sourceTree = "<group>"; };
 		EB50CBA2198F1024001AC515 /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
+		EB680F99199C3C4600CF5B8B /* FLTRBookmarkAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTRBookmarkAddViewController.h; sourceTree = "<group>"; };
+		EB680F9A199C3C4600CF5B8B /* FLTRBookmarkAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTRBookmarkAddViewController.m; sourceTree = "<group>"; };
+		EB680F9C199C504200CF5B8B /* FLTRBookmarkAddCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTRBookmarkAddCell.h; sourceTree = "<group>"; };
+		EB680F9D199C504200CF5B8B /* FLTRBookmarkAddCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTRBookmarkAddCell.m; sourceTree = "<group>"; };
 		EB81E098197DEF9700AFFB4B /* FLTRTabsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTRTabsViewController.h; sourceTree = "<group>"; };
 		EB81E099197DEF9700AFFB4B /* FLTRTabsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTRTabsViewController.m; sourceTree = "<group>"; };
 		EB81E09B197DEFED00AFFB4B /* FLTRTabCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTRTabCell.h; sourceTree = "<group>"; };
@@ -183,6 +189,10 @@
 				EB2F88771989D81B00852A5B /* FLTRBookmarksViewController.m */,
 				EB4254E61989E1DC00E4C344 /* FLTRBookmarkCell.h */,
 				EB4254E71989E1DC00E4C344 /* FLTRBookmarkCell.m */,
+				EB680F99199C3C4600CF5B8B /* FLTRBookmarkAddViewController.h */,
+				EB680F9A199C3C4600CF5B8B /* FLTRBookmarkAddViewController.m */,
+				EB680F9C199C504200CF5B8B /* FLTRBookmarkAddCell.h */,
+				EB680F9D199C504200CF5B8B /* FLTRBookmarkAddCell.m */,
 				EBC4E71F191F25D40043E95D /* Supporting Files */,
 				EBC4E75C191F26C00043E95D /* FLTRRequestListener.h */,
 				EBC4E75D191F26C00043E95D /* FLTRRequestListener.m */,
@@ -369,12 +379,14 @@
 			files = (
 				EBC4E729191F25D40043E95D /* FLTRAppDelegate.m in Sources */,
 				EB81E09D197DEFED00AFFB4B /* FLTRTabCell.m in Sources */,
+				EB680F9B199C3C4600CF5B8B /* FLTRBookmarkAddViewController.m in Sources */,
 				EB81E0A0197DF53F00AFFB4B /* FLTRTabsCollection.m in Sources */,
 				EB81E0A3197DF56600AFFB4B /* FLTRTab.m in Sources */,
 				EB4254EB1989E1E900E4C344 /* FLTRBookmark.m in Sources */,
 				EB81E09A197DEF9700AFFB4B /* FLTRTabsViewController.m in Sources */,
 				EB4254E81989E1DC00E4C344 /* FLTRBookmarkCell.m in Sources */,
 				EB2F88781989D81B00852A5B /* FLTRBookmarksViewController.m in Sources */,
+				EB680F9E199C504200CF5B8B /* FLTRBookmarkAddCell.m in Sources */,
 				EBC4E725191F25D40043E95D /* main.m in Sources */,
 				EB44E9591989E37E007EE74F /* FLTRBookmarksCollection.m in Sources */,
 				EBC4E763191F26FB0043E95D /* FLTRViewController.m in Sources */,
